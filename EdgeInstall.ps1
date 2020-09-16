@@ -1,5 +1,5 @@
 #EdgeInstall.ps1
-$uri1='https://azureinfra.blob.core.windows.net/artifacts/MicrosoftEdgeEnterpriseX64.msi'
+$uri1='http://go.microsoft.com/fwlink/?LinkID=2093437'
 $FileName="MicrosoftEdgeEnterpriseX64.msi"
 
 

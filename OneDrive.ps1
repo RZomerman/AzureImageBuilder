@@ -3,7 +3,7 @@ $workfolder="c:\deployment"
 
 #Office.ps1
 $workfolder="c:\deployment"
-$uri1='https://azureinfra.blob.core.windows.net/artifacts/OneDriveSetup.exe'
+$uri1='https://go.microsoft.com/fwlink/?linkid=844652'
 $FileName="OneDriveSetup.exe"
 
 

@@ -3,9 +3,10 @@ $workfolder="c:\deployment"
 
 
 $workfolder="c:\deployment"
-$uri1='https://azureinfra.blob.core.windows.net/artifacts/Teams_windows_x64.msi'
-$uri2='https://azureinfra.blob.core.windows.net/artifacts/VC_redist.x64.exe'
-$uri3='https://azureinfra.blob.core.windows.net/artifacts/MsRdcWebRTCSvc_HostSetup_1.0.2006.11001_x64.msi'
+$uri1='https://statics.teams.cdn.office.net/production-windows-x64/1.3.00.21759/Teams_windows_x64.msi'
+$uri2='https://aka.ms/vs/16/release/vc_redist.x64.exe'
+$uri3='https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4AQBt'
+
 $FileName="Teams_windows_x64.msi"
 $VCRedist="VC_redist.x64.exe"
 $MsRdcWebRTCSvc="MsRdcWebRTCSvc_HostSetup_1.0.2006.11001_x64.msi"
@@ -30,7 +31,7 @@ $ErrorActionPreference = "Stop"
 $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
-$logFile = $workfolder+'\Teams_'+$date+'.log'
+$logFile = $workfolder+'\Teams'+$date+'.log'
 WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -Logfile $logFile
 
 Writelog -Message "Downloading files" -Logfile $logFile

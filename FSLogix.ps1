@@ -1,7 +1,7 @@
 #ChromeInstall.ps1
 $workfolder="c:\deployment"
 
-$uri1='https://azureinfra.blob.core.windows.net/artifacts/FSLogix_Apps_2.9.7349.30108.zip'
+$uri1='https://aka.ms/fslogix_download'
 $FileName="FSLogix_Apps_2.9.7349.30108.zip"
 
 
@@ -24,7 +24,7 @@ $ErrorActionPreference = "Stop"
 $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
-$logFile = $workfolder+'\FSLogix_'+$date+'.log'
+$logFile = $workfolder+'\FSLogix'+$date+'.log'
 WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -Logfile $logfile
 
 Writelog -Message "Downloading files" -Logfile $logfile

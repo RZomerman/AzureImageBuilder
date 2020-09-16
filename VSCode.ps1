@@ -32,3 +32,6 @@ $VSCode=Get-ChildItem -Path $workfolder -Filter VSCodeSetup*.exe -Recurse -File 
     WriteLog -Message "Staring install of $VSCode" -Logfile $logfile
     Start-Process -FilePath $File -Argument "/VERYSILENT /MERGETASKS=!runcode" -Wait
     WriteLog -Message "Finished install" -Logfile $logfile
+
+
+
