@@ -23,10 +23,10 @@ $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
 $logFile = $workfolder+'\Office_'+$date+'.log'
-WriteLog "Steps will be tracked on the log file : [ $logFile ]"
+WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -LogFile $logfile
 
-Writelog "Downloading files"
-DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $FileName) -retries 3
+Writelog -Message "Downloading files" -LogFile $logfile
+DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $FileName) -retries 3 -LogFile $logfile
 
 $MSIFile=($workfolder + "\" + $FileName)
     $MSIArguments = @(
@@ -37,6 +37,8 @@ $MSIFile=($workfolder + "\" + $FileName)
     "/L*v"
     $logFile
 )
+Writelog -Message "Starting installation" -LogFile $logfile
 Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow 
+Writelog -Message "Installation Completed" -LogFile $logfile
 
 
