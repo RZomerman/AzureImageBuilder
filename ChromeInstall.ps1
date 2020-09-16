@@ -33,7 +33,8 @@ DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $FileName) -
 
 $ChromeZipFile=Get-ChildItem -Path $workfolder -Filter GoogleChrome*.zip -Recurse -File -Name  | ForEach-Object {
     $ZIPFolderName=[System.IO.Path]::GetFileNameWithoutExtension($_)
-    Expand-Archive ($workfolder + "\" + $_) -DestinationPath ($workfolder + "\" + $ZIPFolderName) -Force}
+   Writelog -Message "Expanding Archive" -LogFile $logfile
+   Expand-Archive ($workfolder + "\" + $_) -DestinationPath ($workfolder + "\" + $ZIPFolderName) -Force}
 
     $InstallFolder=($workfolder + "\" + $ZIPFolderName + "\Installers\")
     $Installer=Get-ChildItem -Path $InstallFolder -Filter GoogleChrome*.msi -Recurse -File -Name
@@ -47,4 +48,6 @@ $ChromeZipFile=Get-ChildItem -Path $workfolder -Filter GoogleChrome*.zip -Recurs
     "/L*v"
     $logFile
 )
+Writelog -Message "Starting installation" -LogFile $logfile
 Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow 
+Writelog -Message "Installation Completed" -LogFile $logfile
