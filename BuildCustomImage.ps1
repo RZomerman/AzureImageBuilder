@@ -51,7 +51,7 @@ WriteLog "Steps will be tracked on the log file : [ $logFile ]"
 
 $AllInstallers = New-Object System.Collections.ArrayList
 #Download Indexfile
-DownloadWithRetry -url 'https://azureinfra.blob.core.windows.net/artifacts/indexfile.txt' -downloadLocation ($workfolder + "\indexfile.txt") -retries 3
+DownloadWithRetry -url 'https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/indexfile.txt' -downloadLocation ($workfolder + "\indexfile.txt") -retries 3
 
 
 #This part opens the index file (if exists) and then download all the URL's in the index file. If a line starts with #, this is seen as a comment and no download will occur.
