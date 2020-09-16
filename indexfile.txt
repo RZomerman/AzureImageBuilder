@@ -1,8 +1,11 @@
 #Download Chrome
-#https://azureinfra.blob.core.windows.net/artifacts/GoogleChromeEnterpriseBundle64.zip;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/ChromeInstall.ps1
+https://azureinfra.blob.core.windows.net/artifacts/GoogleChromeEnterpriseBundle64.zip;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/ChromeInstall.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/EdgeInstall.ps1
+;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/Office.ps1
 https://azureinfra.blob.core.windows.net/artifacts/VSCodeSetup-x64-1.48.2.exe;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/VSCode.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/Teams.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/OneDrive.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/FSLogix.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/CustomRegistry.ps1
+;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/fileassociations.ps1
+;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/startmenu.ps1
