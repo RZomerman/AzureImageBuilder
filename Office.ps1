@@ -48,11 +48,13 @@ $File=Get-ChildItem -Path $workfolder -Filter officedeploymenttool_*.exe -Recurs
 $OfficeSetup=($OfficeInstallPath + "\setup.exe")
 copy $XMLFile ($OfficeInstallPath + "\office.xml")
 
-$Command={& "$OfficeSetup" /download Office.xml}
-RunLog-Command -Description "Starting Office download" -Command $Command
+
+writelog "Starting Office Download"
+& "$OfficeSetup" /download Office.xml
 
 
-$Command={& "$OfficeSetup" /Configure Office.xml}
-RunLog-Command -Description "Starting installation / configuration" -Command $Command
+writelog "Starting Office Configuration"
+& "$OfficeSetup" /Configure Office.xml
+
 
 writelog -description "Installation Complete"
