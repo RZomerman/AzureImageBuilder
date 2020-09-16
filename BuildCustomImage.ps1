@@ -46,12 +46,12 @@ $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
 $logFile = $workfolder+'\Deployment'+$date+'.log'
-WriteLog "Steps will be tracked on the log file : [ $logFile ]" 
+WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -Logfile $logfile
 
 
 $AllInstallers = New-Object System.Collections.ArrayList
 #Download Indexfile
-DownloadWithRetry -url 'https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/indexfile.txt' -downloadLocation ($workfolder + "\indexfile.txt") -retries 3
+DownloadWithRetry -url 'https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/indexfile.txt' -downloadLocation ($workfolder + "\indexfile.txt") -retries 3 -LogFile $logfile
 
 
 #This part opens the index file (if exists) and then download all the URL's in the index file. If a line starts with #, this is seen as a comment and no download will occur.
@@ -59,13 +59,13 @@ If (Test-path ($workfolder + "\indexfile.txt")) {
     [array]$DownloadIndex=Get-Content -Path ($workfolder + "\indexfile.txt")
     ForEach ($URI in $DownloadIndex) {
         If ($URI.startswith("#")) {
-            WriteLog -Description $URI -Color "Yellow"
+            WriteLog -Message $URI -Color "Yellow" -Logfile $logFile
         }else{
             If ($URI.Contains(";")){
                 $URL=$URI.split(";")
                 $Installer=($URL[1].split("/")[-1])
                 $TargetURL=$URL[1]
-                DownloadWithRetry -url $TargetURL -downloadLocation ($workfolder + "\" + $Installer) -retries 3
+                DownloadWithRetry -url $TargetURL -downloadLocation ($workfolder + "\" + $Installer) -retries 3  -LogFile $logfile
                 $void=$AllInstallers.add($Installer)
                 
 
@@ -73,12 +73,12 @@ If (Test-path ($workfolder + "\indexfile.txt")) {
                 $FileName=($URL[0].split("/")[-1])
                 $TargetURL=$URL[0]
                 
-                DownloadWithRetry -url $TargetURL -downloadLocation ($workfolder + "\" + $FileName) -retries 3
+                DownloadWithRetry -url $TargetURL -downloadLocation ($workfolder + "\" + $FileName) -retries 3 -LogFile $logfile
                 }
 
             }else{
                 $FileName=($URI.split("/")[-1])
-                DownloadWithRetry -url $URI -downloadLocation ($workfolder + "\" + $FileName) -retries 3
+                DownloadWithRetry -url $URI -downloadLocation ($workfolder + "\" + $FileName) -retries 3 -LogFile $logfile
             }
         }
     }
@@ -86,9 +86,9 @@ If (Test-path ($workfolder + "\indexfile.txt")) {
 
 #Run all installers in the $AllInstallers array
 ForEach ($Installer in $AllInstallers){
-    writelog "starting installation of $Installer"
+    writelog -Message "starting installation of $Installer" -Logfile $logFile
     $Command=($workfolder + "\" + $Installer)
-    writelog $Command
+    writelog -Message $Command -Logfile $logfile
     &"$Command"
 }
 

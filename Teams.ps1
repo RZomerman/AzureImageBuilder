@@ -31,12 +31,12 @@ $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
 $logFile = $workfolder+'\Office_'+$date+'.log'
-WriteLog "Steps will be tracked on the log file : [ $logFile ]"
+WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -Logfile $logFile
 
-Writelog "Downloading files"
-DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $FileName) -retries 3
-DownloadWithRetry -url $URI2 -downloadLocation ($workfolder + "\" + $VCRedist) -retries 3
-DownloadWithRetry -url $URI3 -downloadLocation ($workfolder + "\" + $MsRdcWebRTCSvc ) -retries 3
+Writelog -Message "Downloading files" -Logfile $logFile
+DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $FileName) -retries 3 -LogFile $logfile
+DownloadWithRetry -url $URI2 -downloadLocation ($workfolder + "\" + $VCRedist) -retries 3 -LogFile $logfile
+DownloadWithRetry -url $URI3 -downloadLocation ($workfolder + "\" + $MsRdcWebRTCSvc ) -retries 3 -LogFile $logfile
     
 $File=$FileName
     $File=($workfolder + "\" + $File)
@@ -44,6 +44,7 @@ $File=$FileName
 $logfile=($workfolder + "\TeamsInstall.log")
 
 #Set Registry Keys:
+Writelog -Message "Setting registry settings" -Logfile $logFile
 New-Item -Path HKLM:\SOFTWARE\Microsoft\Teams\
 New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Teams\' -Name IsWVDEnvironment -Value 1 -PropertyType DWORD
 
@@ -57,9 +58,11 @@ New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Teams\' -Name IsWVDEnvironment 
     "ALLUSERS=1"
     "ALLUSER=1"
 )
+Writelog -Message "Installing Teams" -Logfile $logFile
 Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow 
 
 #End of teams install, now need to install VCRedist
+Writelog -Message "Installing VCRedistribute" -Logfile $logFile
 $File=($workfolder + "\" + $VCRedist)
 $logfile=($workfolder + "\VC_redist_x64.log")
 Start-Process -FilePath $File -Argument "/Install /quiet /norestart /log $logfile" -Wait
@@ -75,6 +78,7 @@ $MSIArguments = @(
 "/L*v"
 $logFile
 )
+Writelog -Message "Installing MS RTCWEB" -Logfile $logFile
 Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow 
 
 

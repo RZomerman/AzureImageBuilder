@@ -25,9 +25,9 @@ $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
 $logFile = $workfolder+'\Office_'+$date+'.log'
-WriteLog "Steps will be tracked on the log file : [ $logFile ]"
+WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -Logfile $logfile
 
-Writelog "Downloading files"
+Writelog -Message "Downloading files" -Logfile $logfile
 DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $FileName) -retries 3
 
 $File=Get-ChildItem -Path $workfolder -Filter FSLogi*.zip -Recurse -File -Name  | ForEach-Object {
@@ -39,4 +39,5 @@ $File=Get-ChildItem -Path $workfolder -Filter FSLogi*.zip -Recurse -File -Name  
 
 $File=($InstallFolder + "\FSLogixAppsSetup.exe")
 $logfile=($workfolder + "\FSLogixAppsSetup.log")
+Writelog -Message "Running installer for FSLogix" -Logfile $logFile
 Start-Process -FilePath $File -Argument "/Install /quiet /norestart /log $logfile" -Wait

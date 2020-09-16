@@ -26,10 +26,10 @@ $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
 $logFile = $workfolder+'\OneDrive'+$date+'.log'
-WriteLog "Steps will be tracked on the log file : [ $logFile ]"
+WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -Logfile $logfile
 
-Writelog "Downloading files"
-DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $FileName) -retries 3
+Writelog -Message "Downloading files" -Logfile $logfile
+DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $FileName) -retries 3 -LogFile $logfile
 
 
     $File=($workfolder + "\" + $FileName)

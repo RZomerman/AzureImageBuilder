@@ -23,11 +23,11 @@ $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
 $logFile = $workfolder+'\Office_'+$date+'.log'
-WriteLog "Steps will be tracked on the log file : [ $logFile ]"
+WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]"  -logfile $logfile
 
-Writelog "Downloading files"
-DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\officedeploymenttool_12827-20268.exe") -retries 3
-DownloadWithRetry -url $URI2 -downloadLocation ($workfolder + "\WVDOffice.xml") -retries 3
+Writelog -Message "Downloading files" -logfile $logfile
+DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\officedeploymenttool_12827-20268.exe") -retries 3 -LogFile $logfile
+DownloadWithRetry -url $URI2 -downloadLocation ($workfolder + "\WVDOffice.xml") -retries 3 -LogFile $logfile
 
 If (!(Test-path ($workfolder + "\Office"))) {
     $OfficeInstallFolder=new-item -Path $workfolder -Name Office -ItemType Directory
@@ -39,9 +39,9 @@ $File=Get-ChildItem -Path $workfolder -Filter officedeploymenttool_*.exe -Recurs
     #$Command=("$File /VERYSILENT /MERGETASKS=!runcode")
     #&"$File"
 
-    writelog "Starting Tools installation"
+    writelog  -Message  "Starting Tools installation"  -logfile $logfile
     Start-Process -FilePath $File -Argument "/quiet /extract:$OfficeInstallPath" -Wait
-    writelog "finished Tools installation"
+    writelog  -Message "finished Tools installation" -logfile $logfile
     
 
 #After Extracting, we can check for an OfficeXML file and download the configuration
@@ -49,11 +49,11 @@ $OfficeSetup=($OfficeInstallPath + "\setup.exe")
 copy $XMLFile ($OfficeInstallPath + "\office.xml")
 
 
-writelog "Starting Office Download"
+writelog  -Message  "Starting Office Download" -logfile $logfile
 &"$OfficeSetup" /download c:\deployment\office\Office.xml
 
-writelog "Starting Office Configuration"
+writelog  -Message  "Starting Office Configuration" -logfile $logfile
 &"$OfficeSetup" /Configure c:\deployment\office\Office.xml
 
 
-writelog -description "Installation Complete"
+writelog -Message "Installation Complete" -logfile $logfile
