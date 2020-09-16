@@ -50,11 +50,11 @@ copy $XMLFile ($OfficeInstallPath + "\office.xml")
 
 
 writelog "Starting Office Download"
-& "$OfficeSetup" /download Office.xml
+& "$OfficeSetup" /download c:\deployment\office\Office.xml
 
 
 writelog "Starting Office Configuration"
-& "$OfficeSetup" /Configure Office.xml
+& "$OfficeSetup" /Configure c:\deployment\office\Office.xml
 
 
 writelog -description "Installation Complete"
