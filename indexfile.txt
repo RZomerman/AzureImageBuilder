@@ -1,5 +1,5 @@
 #Download Chrome
-https://azureinfra.blob.core.windows.net/artifacts/GoogleChromeEnterpriseBundle64.zip;ChromeInstall.ps1
+#https://azureinfra.blob.core.windows.net/artifacts/GoogleChromeEnterpriseBundle64.zip;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/ChromeInstall.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/EdgeInstall.ps1
 https://azureinfra.blob.core.windows.net/artifacts/VSCodeSetup-x64-1.48.2.exe;VSCode.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/Teams.ps1
