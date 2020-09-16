@@ -46,7 +46,23 @@ $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
 $logFile = $workfolder+'\Deployment'+$date+'.log'
+
+#Cosmetic stuff
+WriteLog  -Message  "" -Logfile $logfile
+WriteLog   -Message "" -Logfile $logfile
+WriteLog   -Message "                               _____        __                                " -Logfile $logfile
+WriteLog   -Message "     /\                       |_   _|      / _|                               " -Logfile $logfile
+WriteLog   -Message "    /  \    _____   _ _ __ ___  | |  _ __ | |_ _ __ __ _   ___ ___  _ __ ___  " -Logfile $logfile
+WriteLog   -Message "   / /\ \  |_  / | | | '__/ _ \ | | | '_ \|  _| '__/ _' | / __/ _ \| '_ ' _ \ " -Logfile $logfile
+WriteLog   -Message "  / ____ \  / /| |_| | | |  __/_| |_| | | | | | | | (_| || (_| (_) | | | | | |" -Logfile $logfile
+WriteLog   -Message " /_/    \_\/___|\__,_|_|  \___|_____|_| |_|_| |_|  \__,_(_)___\___/|_| |_| |_|" -Logfile $logfile
+WriteLog   -Message "     " -Logfile $logfile
+
+
+
 WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -Logfile $logfile
+
+
 
 
 $AllInstallers = New-Object System.Collections.ArrayList
@@ -97,14 +113,17 @@ If (Test-Path ($workfolder + "\" + $StartMenu)) {
         new-item -Path c:\ -Name StartMenu -ItemType Directory
         copy ($workfolder + "\" + $StartMenu) ("c:\startMenu\Startmenu.xml")
         $systemdrive=($env:SystemDrive + "\")
+        writelog -Message "Importig Custom Startmenu" -Logfile $logFile
         Import-StartLayout -LayoutPath 'c:\startMenu\Startmenu.xml' -MountPath $systemdrive
     }
 
 #Import fileassociations.xml if exist
 If (Test-Path ($workfolder + "\" + $fileassociations)) {
     $fileassociationsLocation=($workfolder + "\" + $fileassociations)
+    writelog -Message "Importig Custom App Associations" -Logfile $logFile
     $Command="dism /online /Import-DefaultAppAssociations:$fileassociationsLocation"
     &"$Command"
 }
 
+writelog -Message "!! ALL DONE !!" -Logfile $logFile
 
