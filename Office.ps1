@@ -29,17 +29,19 @@ Writelog "Downloading files"
 DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\officedeploymenttool_12827-20268.exe") -retries 3
 DownloadWithRetry -url $URI2 -downloadLocation ($workfolder + "\WVDOffice.xml") -retries 3
 
-
-$OfficeInstallFolder=new-item -Path $workfolder -Name Office -ItemType Directory
-$OfficeInstallPath=($workfolder + "\" + $OfficeInstallFolder.Name)
+If (!(Test-path ($workfolder + "\Office"))) {
+    $OfficeInstallFolder=new-item -Path $workfolder -Name Office -ItemType Directory
+}
+$OfficeInstallPath=($workfolder + "\Office")
 #Extracting the Office Deployment Tool (extracting in C:\Deployment)
 $File=Get-ChildItem -Path $workfolder -Filter officedeploymenttool_*.exe -Recurse -File -Name 
     $File=($workfolder + "\" + $File)
     #$Command=("$File /VERYSILENT /MERGETASKS=!runcode")
     #&"$File"
 
-    $Command={Start-Process -FilePath $File -Argument "/quiet /extract:$OfficeInstallPath" -Wait}
-    RunLog-Command -Description "Starting installation" -Command $Command
+    writelog "Starting Tools installation"
+    Start-Process -FilePath $File -Argument "/quiet /extract:$OfficeInstallPath" -Wait
+    writelog "finished Tools installation"
     
 
 #After Extracting, we can check for an OfficeXML file and download the configuration
