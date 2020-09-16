@@ -22,7 +22,7 @@ $ErrorActionPreference = "Stop"
 $date = Get-Date -UFormat "%Y-%m-%d-%H-%M"
 #$workfolder = Split-Path $script:MyInvocation.MyCommand.Path
 $workfolder = "C:\Deployment"
-$logFile = $workfolder+'\Office_'+$date+'.log'
+$logFile = $workfolder+'\EdgeInstall'+$date+'.log'
 WriteLog -Message "Steps will be tracked on the log file : [ $logFile ]" -LogFile $logfile
 
 Writelog -Message "Downloading files" -LogFile $logfile
