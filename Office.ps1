@@ -38,7 +38,7 @@ $File=Get-ChildItem -Path $workfolder -Filter officedeploymenttool_*.exe -Recurs
     #$Command=("$File /VERYSILENT /MERGETASKS=!runcode")
     #&"$File"
 
-    $Command='Start-Process -FilePath $File -Argument "/quiet /extract:$OfficeInstallPath" -Wait'
+    $Command={Start-Process -FilePath $File -Argument "/quiet /extract:$OfficeInstallPath" -Wait}
     RunLog-Command -Description "Starting installation" -Command $Command
     
 
@@ -46,11 +46,11 @@ $File=Get-ChildItem -Path $workfolder -Filter officedeploymenttool_*.exe -Recurs
 $OfficeSetup=($OfficeInstallPath + "\setup.exe")
 copy $XMLFile ($OfficeInstallPath + "\office.xml")
 
-$Command='& "$OfficeSetup" /download Office.xml'
+$Command={& "$OfficeSetup" /download Office.xml}
 RunLog-Command -Description "Starting Office download" -Command $Command
 
 
-$Command='& "$OfficeSetup" /Configure Office.xml'
+$Command={& "$OfficeSetup" /Configure Office.xml}
 RunLog-Command -Description "Starting installation / configuration" -Command $Command
 
 writelog -description "Installation Complete"
