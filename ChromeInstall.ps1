@@ -17,8 +17,3 @@ $ChromeZipFile=Get-ChildItem -Path $workfolder -Filter GoogleChrome*.zip -Recurs
     $logFile
 )
 Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow 
-
-
-Invoke-WebRequest -UseBasicParsing -Uri 'https://raw.githubusercontent.com/gunnarhaslinger/Microsoft-Edge-based-on-Chromium-Scripts/master/EdgeChromium-FirstRunExperience.ps1' -OutFile ($workfolder + "\EdgeChromium-FirstRunExperience.ps1")
-
-&"($workfolder + "\EdgeChromium-FirstRunExperience.ps1")"
