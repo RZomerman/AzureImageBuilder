@@ -52,7 +52,6 @@ copy $XMLFile ($OfficeInstallPath + "\office.xml")
 writelog "Starting Office Download"
 &"$OfficeSetup" /download c:\deployment\office\Office.xml
 
-
 writelog "Starting Office Configuration"
 &"$OfficeSetup" /Configure c:\deployment\office\Office.xml
 
