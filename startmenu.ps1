@@ -28,7 +28,7 @@ Writelog -Message "Downloading files" -logfile $logfile
 DownloadWithRetry -url $URI1 -downloadLocation ($workfolder + "\" + $StartMenu) -retries 3 -LogFile $logfile
 
 
-If (!(Test-Path ($workfolder + "\" + $StartMenu))) {
+If (!(Test-Path ($workfolder + "\StartMenu"))) {
     new-item -Path c:\ -Name StartMenu -ItemType Directory
 }
 copy ($workfolder + "\" + $StartMenu) ("c:\startMenu\Startmenu.xml")
