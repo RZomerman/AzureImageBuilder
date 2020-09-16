@@ -1,5 +1,5 @@
 #Download Chrome
-https://dl.google.com/dl/chrome/install/GoogleChromeEnterpriseBundle64.zip;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/ChromeInstall.ps1
+;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/ChromeInstall.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/EdgeInstall.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/Office.ps1
 ;https://raw.githubusercontent.com/RZomerman/AzureImageBuilder/master/VSCode.ps1
