@@ -23,9 +23,9 @@ Function RunLog-Command([string]$Description, [ScriptBlock]$Command, [string]$Co
 }
 
 
-Function WriteLog([string]$Description, [string]$Color, [string]$LogFile){
+Function WriteLog([string]$Message, [string]$Color, [string]$LogFile){
     If (!($Color)) {$Color="Yellow"}
-    $Output = $Description+'  ... '
+    $Output = $Message+'  ... '
     Write-Host $Output -ForegroundColor $Color
     ((Get-Date -UFormat "[%d-%m-%Y %H:%M:%S] ") + $Output) | Out-File -FilePath $LogFile -Append -Force   
 }
