@@ -3,7 +3,7 @@ $workfolder="c:\deployment"
 
 
 $workfolder="c:\deployment"
-$uri1='https://go.microsoft.com/fwlink/p/?LinkID=869426&clcid=0x409&culture=en-us&country=US&lm=deeplink&lmsrc=groupChatMarketingPageWeb&cmpid=directDownloadWin64'
+$uri1='https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true'
 $uri2='https://aka.ms/vs/16/release/vc_redist.x64.exe'
 $uri3='https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4AQBt'
 
