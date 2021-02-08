@@ -39,6 +39,15 @@ $MSIFile=($workfolder + "\" + $FileName)
 )
 Writelog -Message "Starting installation" -LogFile $logfile
 Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow 
+
+Writelog -Message "Removing First Run Experience" -LogFile $logfile
+If (!(Test-Path HKLM:\Software\Policies\Microsoft\Edge)) {
+    New-Item HKLM:\Software\Policies\Microsoft\Edge
+}
+If (!(Test-Path HKLM:\Software\Policies\Microsoft\Edge\HideFirstRunExperience)) {
+    New-Item HKLM:\Software\Policies\Microsoft\Edge -Name HideFirstRunExperience -ItemType DWORD -Value 1
+}
+
 Writelog -Message "Installation Completed" -LogFile $logfile
 
 
